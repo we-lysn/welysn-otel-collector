@@ -9,7 +9,7 @@ processors:
 
 exporters:
   otlp:
-    endpoint: tempo:4317
+    endpoint: welysn-tempo:4317
     tls:
       insecure: true
 
