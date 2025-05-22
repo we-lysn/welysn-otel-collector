@@ -2,10 +2,11 @@ version: '3.8'
 
 services:
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
-    container_name: otel-collector
+    build: .
+    container_name: welysn-otel-collector
     ports:
       - "4318:4318"  # OTLP HTTP receiver
     volumes:
       - ./collector-config.yaml:/etc/otelcol/config.yaml
-    command: ["--config=/etc/otelcol/config.yaml"]
+    environment:
+      BASIC_AUTH_HTPASSWD: ${BASIC_AUTH_HTPASSWD}

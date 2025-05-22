@@ -1,19 +1,32 @@
+extensions:
+  basicauth/server:
+    htpasswd:
+      inline: |
+        ${BASIC_AUTH_HTPASSWD}
+
 receivers:
   otlp:
     protocols:
       http:
         endpoint: 0.0.0.0:4318
+        auth:
+          authenticator: basicauth/server
 
 processors:
   batch: {}
 
 exporters:
   otlp:
-    endpoint: welysn-tempo:4317
+    # endpoint: welysn-tempo:4317
+    endpoint: welysn-tempo-production.up.railway.app:4317
     tls:
       insecure: true
 
 service:
+  extensions: [basicauth/server]
+  telemetry:
+    logs:
+      level: debug
   pipelines:
     traces:
       receivers: [otlp]
