@@ -17,8 +17,7 @@ processors:
 
 exporters:
   otlp:
-    # endpoint: welysn-tempo:4317
-    endpoint: welysn-tempo-production.up.railway.app:4317
+    endpoint: welysn-tempo:4317
     tls:
       insecure: true
 
