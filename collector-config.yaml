@@ -20,6 +20,8 @@ exporters:
     endpoint: welysn-tempo:4317
     tls:
       insecure: true
+  prometheus:
+    endpoint: "[::]:9464"
 
 service:
   extensions: [basicauth/server]
@@ -31,3 +33,7 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [otlp]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
